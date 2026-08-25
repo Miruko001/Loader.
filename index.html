@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miruko Loader</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            background: radial-gradient(circle at top, #25213d 0%, #12111c 45%, #09090f 100%);
+            color: #f7f4ff;
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            width: min(620px, calc(100% - 32px));
+            padding: 34px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 22px;
+            background: rgba(25, 23, 39, 0.76);
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(16px);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 999px;
+            color: #dbc8ff;
+            background: rgba(157, 99, 255, 0.16);
+            border: 1px solid rgba(176, 125, 255, 0.32);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            margin: 18px 0 8px;
+            font-size: 34px;
+        }
+
+        p {
+            margin: 0 0 24px;
+            line-height: 1.6;
+            color: #bdb8ca;
+        }
+
+        pre {
+            margin: 0;
+            padding: 16px;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 14px;
+            background: #0d0c14;
+            color: #d9c6ff;
+            font-size: 13px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 16px;
+            padding: 14px;
+            border: 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #8b5cf6, #c026d3);
+            color: white;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        button:hover {
+            filter: brightness(1.12);
+        }
+
+        #status {
+            min-height: 20px;
+            margin: 14px 0 0;
+            text-align: center;
+            color: #bdb8ca;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <span class="badge">MIRUKO OFFICIAL</span>
+        <h1>Miruko Loader</h1>
+        <p>Copy the loader below and run it in a compatible environment.</p>
+
+        <pre id="loader">loadstring(game:HttpGet("https://raw.githubusercontent.com/Miruko001/Loader/refs/heads/main/.lua"))()</pre>
+
+        <button id="copyButton">Copy Loader</button>
+        <div id="status"></div>
+    </main>
+
+    <script>
+        const loader = document.getElementById("loader").textContent
+        const button = document.getElementById("copyButton")
+        const status = document.getElementById("status")
+
+        button.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(loader)
+                status.textContent = "Loader copied to clipboard."
+                button.textContent = "Copied!"
+                setTimeout(() => {
+                    button.textContent = "Copy Loader"
+                    status.textContent = ""
+                }, 2000)
+            } catch {
+                status.textContent = "Copy failed. Select the code manually."
+            }
+        })
+    </script>
+</body>
+</html>
